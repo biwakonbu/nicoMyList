@@ -5,34 +5,27 @@ require 'json'
 require 'pp'
 
 module NicoNicoVideo
-  BASE_URL = "http://www.nicovideo.jp/"
+  BASE_URL = "http://www.nicovideo.jp"
 
   class MyList
     def initialize(id="")
-      @id = id
+      @res = open(BASE_URL + "/mylist/" + id)
     end
 
-    def get
-      open(BASE_URL + "mylist/" + @id)
+    attr_reader :res
+  end
+
+  def each_video
+    json = JSON.parser.new(parse_list)
+    json.parse.each do |video|
+      yield video
+    end
+  end
+
+  private
+  def parse_list
+    @res.each_line do |line|
+      return $1 if /Mylist.preload.*?(\[{.*}\])/ =~ line
     end
   end
 end
-
-#include NicoNicoVideo
-
-#list = NicoNicoVideo::MyList.new("25274804")
-
-def parse_mylist(html)
-  html.each_line do |line|
-    return $1 if /Mylist.preload.*?(\[{.*}\])/ =~ line
-  end
-end
-=begin
-uri = open("http://www.nicovideo.jp/mylist/25274804") do |html|
-  json = JSON.parser.new(parse_mylist(html))
-  json.parse().each do |item|
-    pp item["item_data"]
-  end
-end
-
-=end
