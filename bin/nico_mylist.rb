@@ -2,7 +2,6 @@
 
 require 'open-uri'
 require 'json'
-require 'pp'
 
 module NicoNicoVideo
   BASE_URL = "http://www.nicovideo.jp"
