@@ -1,3 +1,5 @@
-task :test do
-  print `bundle exec rspec test/`
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = "--colour"
 end
