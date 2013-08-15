@@ -1,0 +1,13 @@
+body {
+    padding-top: 60px;
+}
+.media-heading-center {
+    text-align: center;
+}
+img {
+    width: 85px;
+    height: 112px;
+}
+footer {
+    color: #aaa;
+}
