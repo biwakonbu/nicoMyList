@@ -4,17 +4,34 @@ require 'nico_mylist'
 include NicoNicoVideo
 
 describe MyList do
-  describe '#get' do
+  let(:mylist) { MyList.new('25274804') }
+
+  describe '#new' do
     context 'GET HTTP www.nicovideo.jp' do
       it 'status code 200' do
-        MyList.new('25274804').get.status[0].should eq '200'
+        mylist.res.status[0].should eq '200'
       end
     end
   end
 
-  context 'GET HTTP www.nicovideo.jp/mylist/*' do
-    #    it 'status code return 200' do
-    #      @res.status[0].should eq '200'
-    #  end
+  describe '#each_video' do
+    it 'should be hash' do
+      mylist.each_video {|v| v.class.should eq Hash}
+    end
+  end
+
+  describe '#parse_list' do
+    subject { mylist.send(:parse_list) }
+    it 'should be lists to String class' do
+      should match(/^\[{.*}\]/)
+    end
   end
 end
+
+
+
+
+
+
+
+
