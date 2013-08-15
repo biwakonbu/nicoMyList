@@ -1,3 +1,3 @@
-task :hello do
-  puts 'hello'
+task :test do
+  print `bundle exec rspec test/`
 end
