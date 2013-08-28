@@ -1,4 +1,4 @@
-$LOAD_PATH << File.expand_path('../../bin', __FILE__)
+$LOAD_PATH << File.expand_path('../../lib', __FILE__)
 
 require 'nico_mylist'
 include NicoNicoVideo
